@@ -1,4 +1,4 @@
-# Photometry Pipeline Docker and Singularity build
+# Photometry Pipeline Docker and Singularity Build
 
 This repository contains the instructions, tests and other information for building the docker and singularity images for the photometry-pipeline. The corosponding docker image can be found here [https://hub.docker.com/r/toddwickizer/photometrypipeline-singularity/](https://hub.docker.com/r/toddwickizer/photometrypipeline-singularity/).
 
@@ -20,128 +20,66 @@ These instructions will get you a copy of the project up and running on your loc
 
   See https://docs.docker.com/engine/installation/
   > __Note__: Make sure you get the correct version, avoid installing from the default repositories
-
+  
+---------------------------------------------------------------------------------------------------------------------------- 
+ 
 ### Getting the docker image
 
-Grabbing the docker image is as simple as using the docker cli. The [docker pull](https://docs.docker.com/engine/reference/commandline/pull/) pulls an image from a docker repository.
+  Grabbing the docker image is as simple as using the docker cli. The [docker pull](https://docs.docker.com/engine/reference/commandline/pull/) pulls an image from a docker repository.
 
-To grab the latest version:
+  To grab the latest version:
 
-`toddwickizer/photometrypipeline-singularity`
+  `docker pull toddwickizer/photometrypipeline-singularity`
 
-To grab a specific version:
+  To grab a specific version:
 
-`toddwickizer/photometrypipeline-singularity:<version_tag>`
+  `docker pull toddwickizer/photometrypipeline-singularity:<version_tag>`
 
-> __Note__: This may take a minute to download as the image tends to be 500mb+
+  > __Note__: This may take a minute to download as the image tends to be 500mb+
 
 
-### Running a bash shell from your docker image.
+### Running pp_run from your docker image.
 
-Running a shell requires using the [docker run](https://docs.docker.com/engine/reference/run/) command.
+  Running a shell requires using the [docker run](https://docs.docker.com/engine/reference/run/) command.
 
-`docker run -i -t toddwickizer/photometrypipeline-singularity /bin/bash`
+  `docker run -i -t toddwickizer/photometrypipeline-singularity /bin/bash`
 
-Explanation of the above command:
+  Explanation of the above command:
 
-`run` executes the image, with additional arguments to be ran.  
-`-i` creates an interactive session  
-`-t` tells docker to run the image 'tagged' with toddwickizer/...  
-`/bin/bash` tells docker to execute the shell after the image is loaded.  
+  `run` executes the image, with additional arguments to be ran.  
+  `-i` creates an interactive session  
+  `-t` tells docker to run the image 'tagged' with toddwickizer/...  
+  `/bin/bash` tells docker to execute the shell after the image is loaded.  
 
+  Once you are inside the docker-shell you can run pp_run with test data to verify the docker shell is working
+    1. `cd example_data/vatt4k` Navigate to where the test file is
+    2. `pp_run mscience0217.fits` Execute the pp_run program with the test file as an argument.
 
+---------------------------------------------------------------------------------------------------------------------------
 
+### Creating singularity image 
 
+No need to download anything from this repository! Simply type:
 
+     docker run \        
+     -v /var/run/docker.sock:/var/run/docker.sock \
+     -v path\where\to\ouptut\singularity\image:/output \
+     --privileged -t --rm \
+     singularityware/docker2singularity \            
+     toddwickizer/photometrypipeline-singularity
 
+Replace `path\where\to\ouptut\singularity\image` with a path on the host filesystem where your Singularity image will be created. `toddwickizer/photometrypipeline-singularity` is the docker image provided (it will be pulled from Docker Hub if it does not exist on your host system).
 
+`docker2singularity` uses the Docker daemon located on the host system. It will access the Docker image cache from the host system avoiding having to redownload images that are already present locally.
 
 
+### Running pp_run from you singularity image
 
+1. Ensure you are currently in a directory where there is a .fits or other test file.
+2. `singularity exec path\where\to\ouptut\singularity\image\<image_name>.img pp_run <test_file>.fits`
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# Using the Docker Image
-
-## Requirements 
-
-### Installing docker
-[https://docs.docker.com/engine/installation/](https://docs.docker.com/engine/installation/)
-
-> __Note__: Make sure you get the correct version, avoid installing from the default repositories
-
-
-
-## Requirements ##
-
-### Installing Singularity ###
-
-See http://singularity.lbl.gov/install-linux
-
-note: you will HAVE to install from source
-
-if you are on ubuntu 16+ you will need the following
-`sudo apt-get install -y build-essential libtool autotools-dev automake autoconf`
-
-### Installing docker ###
-https://docs.docker.com/engine/installation/
-
-note: Make sure you get the correct version, avoid installing from the default repositories
-
-
-
-
---------------------------------------------------------------------------------------------
-
-
-
-# Pulling this directory #
-
-Clone this directory with `git clone`
-
-Note: Make sure to take note of where you put the files.
-
-# Creating singularity image #
-
-We will actually be using a docker image to create our singularity image. 
-
-`docker run -v /var/run/docker.sock:/var/run/docker.sock -v /home/todd/dockerpipe:/output --privileged -t --rm singularityware/docker2singularity toddwickizer/photometrypipeline `
-
-You will need to edit the above line where `/home/todd/dockerpipe` where you pulled this github directory. 
-This will place a .img file in that directory. The .img file will be a bundled singularity docker file with all the requirements for the pipeline built in. 
-
-Note: I prefer to rename my .img file once it has been created. `mv toddwickizer...img pipe.img`
-
-
-# Testing singularity image #
-
-Go into the tests directory
-
-`cd tests`
-
-then run the command
-
-`singularity exec ../pipe.img pp_run mscience0217.fits`
-
-
-You should get the results of that test.
-
-
-# Uploading the image to HPC #
+### Uploading the image to HPC 
 1. make sure you have ssh no password verification with sftp.hpc.arizona.edu
 2. Edit the following command `rsync -avz  /home/todd/dockerpipe twickizer@sftp.hpc.arizona.edu:/extra/twickizer`
 
