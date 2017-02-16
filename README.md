@@ -1,12 +1,25 @@
+# Photometry Pipeline Docker and Singularity build
 
-# Using the Docker Image
+This repository contains the instructions, tests and other information for building the docker and singularity images for the photometry-pipeline. The corosponding docker image can be found here [https://hub.docker.com/r/toddwickizer/photometrypipeline-singularity/](https://hub.docker.com/r/toddwickizer/photometrypipeline-singularity/).
 
-## Requirements 
+The actual photometrypipeline source can be found here [https://github.com/mommermi/photometrypipeline](https://github.com/mommermi/photometrypipeline)
 
-### Installing docker
-[https://docs.docker.com/engine/installation/](https://docs.docker.com/engine/installation/)
 
-> __Note__: Make sure you get the correct version, avoid installing from the default repositories
+## Getting Started
+
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+
+### Prerequisites
+
+* __Installing Singularity__
+
+  See http://singularity.lbl.gov/install-linux
+  > __Note__: You need to install from source. Do NOT install version 2.2
+
+* __Installing Docker__  
+
+  See https://docs.docker.com/engine/installation/
+  > __Note__: Make sure you get the correct version, avoid installing from the default repositories
 
 ### Getting the docker image
 
@@ -31,10 +44,47 @@ Running a shell requires using the [docker run](https://docs.docker.com/engine/r
 
 Explanation of the above command:
 
-`run` executes the image, with additional arguments to be ran.
-`-i` creates an interactive session
-`-t` tells docker to run the image 'tagged' with toddwickizer/...
-`/bin/bash` tells docker to execute the shell after the image is loaded.
+`run` executes the image, with additional arguments to be ran.  
+`-i` creates an interactive session  
+`-t` tells docker to run the image 'tagged' with toddwickizer/...  
+`/bin/bash` tells docker to execute the shell after the image is loaded.  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Using the Docker Image
+
+## Requirements 
+
+### Installing docker
+[https://docs.docker.com/engine/installation/](https://docs.docker.com/engine/installation/)
+
+> __Note__: Make sure you get the correct version, avoid installing from the default repositories
+
+
 
 ## Requirements ##
 
