@@ -51,9 +51,9 @@ These instructions will get you a copy of the project up and running on your loc
   `-t` tells docker to run the image 'tagged' with toddwickizer/...  
   `/bin/bash` tells docker to execute the shell after the image is loaded.  
 
-  Once you are inside the docker-shell you can run pp_run with test data to verify the docker shell is working
-    1. `cd example_data/vatt4k` Navigate to where the test file is
-    2. `pp_run mscience0217.fits` Execute the pp_run program with the test file as an argument.
+  Once you are inside the docker-shell you can run pp_run with test data to verify the docker shell is working  
+    1. `cd example_data/vatt4k` Navigate to where the test file is  
+    2. `pp_run mscience0217.fits` Execute the pp_run program with the test file as an argument.  
 
 ---------------------------------------------------------------------------------------------------------------------------
 
