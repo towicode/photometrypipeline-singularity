@@ -1,8 +1,45 @@
 
+# Using the Docker Image
+
+## Requirements 
+
+### Installing docker
+[https://docs.docker.com/engine/installation/](https://docs.docker.com/engine/installation/)
+
+> __Note__: Make sure you get the correct version, avoid installing from the default repositories
+
+### Getting the docker image
+
+Grabbing the docker image is as simple as using the docker cli. The [docker pull](https://docs.docker.com/engine/reference/commandline/pull/) pulls an image from a docker repository.
+
+To grab the latest version
+
+`toddwickizer/photometrypipeline-singularity`
+
+To grab a specific version
+
+`toddwickizer/photometrypipeline-singularity:<version_tag>`
+
+> __Note__: This may take a minute to download as the image tends to be 500mb+
 
 
+### Running a bash shell from your docker image.
 
-# Requirements #
+Running a shell requires using the [docker run](https://docs.docker.com/engine/reference/run/) command.
+
+`docker run -i -t toddwickizer/photometrypipeline-singularity /bin/bash`
+
+Explanation of the above command.
+
+`run` executes the image, with additional arguments to be ran.
+
+`-i` creates an interactive session
+
+`-t' tells docker to run the image 'tagged' with toddwickizer/...
+
+'/bin/bash` tells docker to execute the shell after the image is loaded.
+
+## Requirements ##
 
 ### Installing Singularity ###
 
