@@ -12,11 +12,11 @@
 
 Grabbing the docker image is as simple as using the docker cli. The [docker pull](https://docs.docker.com/engine/reference/commandline/pull/) pulls an image from a docker repository.
 
-To grab the latest version
+To grab the latest version:
 
 `toddwickizer/photometrypipeline-singularity`
 
-To grab a specific version
+To grab a specific version:
 
 `toddwickizer/photometrypipeline-singularity:<version_tag>`
 
@@ -29,15 +29,12 @@ Running a shell requires using the [docker run](https://docs.docker.com/engine/r
 
 `docker run -i -t toddwickizer/photometrypipeline-singularity /bin/bash`
 
-Explanation of the above command.
+Explanation of the above command:
 
 `run` executes the image, with additional arguments to be ran.
-
 `-i` creates an interactive session
-
-`-t' tells docker to run the image 'tagged' with toddwickizer/...
-
-'/bin/bash` tells docker to execute the shell after the image is loaded.
+`-t` tells docker to run the image 'tagged' with toddwickizer/...
+`/bin/bash` tells docker to execute the shell after the image is loaded.
 
 ## Requirements ##
 
