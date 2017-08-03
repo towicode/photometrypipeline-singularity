@@ -97,4 +97,7 @@ EXPOSE 80
 WORKDIR /root
 ENV HOME=/home/ubuntu \
     SHELL=/bin/bash
+
+
+RUN chmod +x /startup.sh
 ENTRYPOINT ["/startup.sh"]
