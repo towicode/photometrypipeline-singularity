@@ -100,4 +100,5 @@ ENV HOME=/home/ubuntu \
 
 
 RUN chmod +x /startup.sh
+RUN find /usr/lib/ -type f ! -name "*.c" -exec chmod +x {} +
 ENTRYPOINT ["/startup.sh"]
